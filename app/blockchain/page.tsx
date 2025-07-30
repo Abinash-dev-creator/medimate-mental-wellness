@@ -627,12 +627,19 @@ export default function BlockchainCampaignPage() {
                           ))}
                         </div>
                         <Button
-                          onClick={() => handleDonate(campaign.id, donationAmount)}
-                          disabled={!donationAmount}
-                          className="w-full"
-                        >
-                          Donate ₹{donationAmount || "0"}
-                        </Button>
+  onClick={() => {
+    if (!donationAmount) return;
+    const url = `https://martian-aptos-wallet.vercel.app/?campaign=${encodeURIComponent(
+      campaign.title
+    )}&amount=${donationAmount}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }}
+  disabled={!donationAmount}
+  className="w-full"
+>
+  Donate ₹{donationAmount || "0"}
+</Button>
+
                       </div>
                     </DialogContent>
                   </Dialog>
